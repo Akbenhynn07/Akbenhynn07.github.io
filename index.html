@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Akshay Benhynn Yendloori</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#07090f;--surface:#0f1218;--surface2:#161b25;--surface3:#1d2333;
+      --border:#1e2535;--accent:#7c6fff;--accent2:#00e5b8;--accent3:#ffb432;
+      --pink:#ff6eb4;--text:#eceef5;--muted:#6b7280;--radius:16px;
+      --glow-purple:rgba(124,111,255,.25);--glow-teal:rgba(0,229,184,.2);
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+
+    /* ── INTRO OVERLAY ───────────────────────────────── */
+    #intro-overlay{
+      position:fixed;inset:0;z-index:9999;
+      background:#000;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      gap:24px;
+      transition:opacity .8s ease, visibility .8s ease;
+    }
+    #intro-overlay.fade-out{opacity:0;visibility:hidden;pointer-events:none}
+    .intro-initials{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(3rem,10vw,7rem);
+      font-weight:800;
+      letter-spacing:-.02em;
+      background:linear-gradient(135deg,#fff 0%,var(--accent2) 50%,var(--accent) 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      background-clip:text;
+      opacity:0;
+      animation:introFadeIn .8s .3s forwards;
+    }
+    .intro-sub{
+      font-size:.85rem;letter-spacing:4px;text-transform:uppercase;
+      color:rgba(255,255,255,.35);
+      opacity:0;animation:introFadeIn .8s .7s forwards;
+    }
+    .intro-bar{
+      width:180px;height:2px;background:var(--border);border-radius:999px;overflow:hidden;
+      opacity:0;animation:introFadeIn .8s .9s forwards;
+    }
+    .intro-bar-fill{
+      height:100%;width:0;border-radius:999px;
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      transition:width 4s ease-out;
+    }
+    .intro-bar-fill.go{width:100%}
+    @keyframes introFadeIn{to{opacity:1}}
+    #intro-enter-btn{
+      margin-top:10px;
+      padding:14px 44px;border-radius:999px;
+      border:1.5px solid rgba(0,229,184,.5);
+      background:rgba(0,229,184,.08);
+      color:var(--accent2);
+      font-size:.88rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+      cursor:pointer;transition:all .25s;
+      animation:introFadeIn .8s 1.1s forwards;opacity:0;
+      box-shadow:0 0 24px rgba(0,229,184,.15),inset 0 0 20px rgba(0,229,184,.05);
+    }
+    #intro-enter-btn:hover{
+      background:rgba(0,229,184,.18);
+      border-color:rgba(0,229,184,.9);
+      box-shadow:0 0 40px rgba(0,229,184,.45),0 0 80px rgba(0,229,184,.2);
+      transform:scale(1.05);
+    }
+
+    /* ── ANIMATED BG ORBS ────────────────────────────── */
+    .orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;animation:drift 20s ease-in-out infinite alternate}
+    .orb1{width:600px;height:600px;background:rgba(124,111,255,.12);top:-200px;right:-100px;animation-delay:0s}
+    .orb2{width:500px;height:500px;background:rgba(0,229,184,.09);bottom:-150px;left:-100px;animation-delay:-7s}
+    .orb3{width:350px;height:350px;background:rgba(255,110,180,.07);top:50%;left:50%;animation-delay:-13s}
+    @keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(40px,30px) scale(1.08)}}
+
+    /* ── GRID TEXTURE ────────────────────────────────── */
+    body::before{
+      content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+      background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+                       linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+      background-size:50px 50px;
+    }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:16px 7%;
+      background:rgba(7,9,15,.8);
+      backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-logo{
+      font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;
+      background:linear-gradient(90deg,#fff,var(--accent2));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .nav-links{display:flex;gap:28px}
+    .nav-links a{
+      color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:500;
+      letter-spacing:.3px;transition:color .2s;position:relative;
+    }
+    .nav-links a::after{
+      content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;
+      background:var(--accent2);transform:scaleX(0);transition:transform .25s;
+    }
+    .nav-links a:hover{color:var(--accent2)}
+    .nav-links a:hover::after{transform:scaleX(1)}
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero{
+      min-height:100vh;display:flex;align-items:center;
+      justify-content:space-between;gap:60px;
+      padding:120px 7% 80px;
+      position:relative;z-index:1;
+    }
+    .hero-inner{max-width:680px;position:relative;z-index:1}
+    .hero-tag{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+      color:var(--accent2);
+      background:rgba(0,229,184,.08);
+      border:1px solid rgba(0,229,184,.2);
+      padding:7px 18px;border-radius:999px;margin-bottom:28px;
+    }
+    .hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent2);display:inline-block;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+    .hero h1{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2.6rem,5.5vw,4.8rem);
+      line-height:1.08;color:#fff;margin-bottom:10px;
+    }
+    .hero h1 .name-first{color:var(--accent);font-style:italic}
+    .hero h1 .name-rest{display:block;color:#fff}
+    .hero-subtitle{
+      display:flex;flex-wrap:wrap;gap:6px 10px;
+      align-items:center;margin:26px 0 38px;
+      min-height:40px;
+    }
+    .nw{
+      color:rgba(255,255,255,.28);font-size:.95rem;font-weight:500;
+      transition:color .35s,text-shadow .35s,transform .35s;
+      cursor:default;white-space:nowrap;
+    }
+    .nw.lit{
+      color:#fff;font-weight:700;
+      text-shadow:0 0 6px var(--accent2),0 0 18px var(--accent2),0 0 40px rgba(0,229,184,.4);
+      transform:scale(1.04);
+    }
+    .ndot{color:var(--border);font-size:.85rem;line-height:1}
+    .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:13px 28px;border-radius:999px;font-size:.88rem;font-weight:600;
+      text-decoration:none;transition:all .25s;letter-spacing:.2px;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,var(--accent),#9c6dff);
+      color:#fff;box-shadow:0 4px 24px rgba(124,111,255,.3);
+    }
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(124,111,255,.45)}
+    .btn-ghost{color:var(--text);border:1px solid var(--border);backdrop-filter:blur(8px)}
+    .btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+
+    /* ── PHOTO ───────────────────────────────────────── */
+    .hero-photo-wrap{flex-shrink:0;position:relative;z-index:1}
+    .hero-photo-wrap img{
+      width:290px;height:290px;object-fit:cover;border-radius:50%;
+      border:3px solid rgba(124,111,255,.5);
+      box-shadow:0 0 0 10px rgba(124,111,255,.08),0 0 60px rgba(124,111,255,.2),0 30px 70px rgba(0,0,0,.6);
+      display:block;
+    }
+    .hero-photo-ring{
+      position:absolute;inset:-20px;border-radius:50%;
+      border:1.5px dashed rgba(0,229,184,.3);
+      animation:spin 18s linear infinite;pointer-events:none;
+    }
+    .hero-photo-ring2{
+      position:absolute;inset:-36px;border-radius:50%;
+      border:1px dashed rgba(124,111,255,.2);
+      animation:spin 30s linear infinite reverse;pointer-events:none;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* ── SECTIONS ────────────────────────────────────── */
+    section{padding:90px 7%;position:relative;z-index:1}
+    .section-label{
+      font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      margin-bottom:10px;
+    }
+    .section-title{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.8rem,3.5vw,2.5rem);
+      color:#fff;margin-bottom:12px;
+    }
+    .section-desc{color:var(--muted);max-width:540px;font-size:.93rem;margin-bottom:48px}
+    hr.divider{border:none;border-top:1px solid var(--border);margin:0;position:relative;z-index:1}
+
+    /* ── GLASS CARD BASE ─────────────────────────────── */
+    .glass{
+      background:rgba(15,18,24,.7);
+      backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:var(--radius);
+    }
+    .glass:hover{border-color:rgba(124,111,255,.35)}
+
+    /* ── ABOUT ───────────────────────────────────────── */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:10px}
+    @media(max-width:700px){.about-grid{grid-template-columns:1fr}.nav-links{display:none}}
+    .about-card{
+      background:rgba(15,18,24,.7);backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);
+      padding:28px;position:relative;overflow:hidden;
+      transition:border-color .25s,transform .25s;
+    }
+    .about-card::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,var(--accent),var(--accent2),var(--pink));
+      opacity:0;transition:opacity .3s;
+    }
+    .about-card:hover{border-color:rgba(124,111,255,.35);transform:translateY(-3px)}
+    .about-card:hover::before{opacity:1}
+    .about-card h3{font-size:1rem;font-weight:700;margin-bottom:10px;color:#fff}
+    .about-card p{color:var(--muted);font-size:.9rem;line-height:1.75}
+
+    /* ── ROLES ───────────────────────────────────────── */
+    #roles{background:linear-gradient(180deg,var(--surface) 0%,var(--bg) 100%)}
+    .roles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
+    .role-card{
+      background:rgba(22,27,37,.8);backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);
+      padding:26px;position:relative;overflow:hidden;
+      transition:transform .3s,border-color .3s,box-shadow .3s;
+    }
+    .role-card::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+    }
+    .role-card:hover{
+      transform:translateY(-5px);
+      border-color:rgba(124,111,255,.4);
+      box-shadow:0 12px 40px rgba(124,111,255,.15);
+    }
+    .role-org{
+      font-size:.7rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+      color:var(--accent2);margin-bottom:8px;
+    }
+    .role-title{font-size:.97rem;font-weight:700;color:#fff;line-height:1.4;user-select:text}
+
+    /* ── PUBLICATIONS ────────────────────────────────── */
+    .pub-list{display:flex;flex-direction:column;gap:16px}
+    .pub-card{
+      background:rgba(15,18,24,.7);backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);
+      padding:22px 26px;display:flex;gap:20px;align-items:flex-start;
+      transition:border-color .25s,transform .25s,box-shadow .25s;
+    }
+    .pub-card:hover{border-color:rgba(124,111,255,.35);transform:translateX(4px);box-shadow:-4px 0 20px rgba(124,111,255,.1)}
+    .pub-badge{
+      flex-shrink:0;width:48px;height:48px;border-radius:12px;
+      display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+    }
+    .pub-badge.chi{background:rgba(124,111,255,.15)}
+    .pub-badge.ieee{background:rgba(0,229,184,.15)}
+    .pub-badge.facct{background:rgba(255,180,50,.15)}
+    .pub-venue{font-size:.7rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:4px}
+    .pub-venue.chi{color:var(--accent)}
+    .pub-venue.ieee{color:var(--accent2)}
+    .pub-venue.facct{color:var(--accent3)}
+    .pub-title{font-size:.95rem;font-weight:600;color:#fff;margin-bottom:6px}
+    .pub-year{
+      font-size:.75rem;color:var(--muted);
+      background:rgba(255,255,255,.06);border:1px solid var(--border);
+      border-radius:999px;padding:2px 10px;display:inline-block;
+    }
+
+    /* ── CERTS ───────────────────────────────────────── */
+    #certs{background:linear-gradient(180deg,var(--bg) 0%,var(--surface) 100%)}
+    .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    .cert-card{
+      background:rgba(22,27,37,.8);backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);
+      padding:28px 22px;text-align:center;
+      transition:transform .25s,border-color .25s,box-shadow .25s;
+      position:relative;overflow:hidden;
+    }
+    .cert-card::after{
+      content:'';position:absolute;inset:0;border-radius:var(--radius);
+      background:radial-gradient(ellipse at top center,rgba(0,229,184,.06) 0%,transparent 70%);
+      opacity:0;transition:opacity .3s;
+    }
+    .cert-card:hover{transform:translateY(-5px);border-color:rgba(0,229,184,.35);box-shadow:0 12px 40px rgba(0,229,184,.1)}
+    .cert-card:hover::after{opacity:1}
+    .cert-icon{font-size:2.2rem;margin-bottom:14px;display:block}
+    .cert-name{font-weight:700;font-size:.95rem;color:#fff;margin-bottom:5px}
+    .cert-sub{font-size:.8rem;color:var(--muted)}
+
+    /* ── DOMAIN ──────────────────────────────────────── */
+    .domain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+    .domain-card{
+      background:rgba(15,18,24,.7);backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);
+      padding:22px;transition:transform .25s,border-color .25s,box-shadow .25s;
+      position:relative;overflow:hidden;
+    }
+    .domain-card::before{
+      content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+      background:linear-gradient(90deg,transparent,var(--accent2),transparent);
+      opacity:0;transition:opacity .3s;
+    }
+    .domain-card:hover{transform:translateY(-4px);border-color:rgba(124,111,255,.35);box-shadow:0 10px 30px rgba(124,111,255,.12)}
+    .domain-card:hover::before{opacity:1}
+    .domain-icon{font-size:1.7rem;margin-bottom:10px}
+    .domain-name{font-weight:700;color:#fff;font-size:.93rem;margin-bottom:5px}
+    .domain-desc{font-size:.8rem;color:var(--muted);line-height:1.6}
+
+    /* ── EDUCATION ───────────────────────────────────── */
+    #education{background:linear-gradient(180deg,var(--surface) 0%,var(--bg) 100%)}
+    .edu-timeline{display:flex;flex-direction:column;position:relative}
+    .edu-timeline::before{
+      content:'';position:absolute;left:19px;top:0;bottom:0;
+      width:2px;background:linear-gradient(180deg,var(--accent),var(--accent2),transparent);
+    }
+    .edu-item{display:flex;gap:24px;padding-bottom:32px;position:relative}
+    .edu-dot{
+      flex-shrink:0;width:40px;height:40px;border-radius:50%;
+      background:var(--surface2);border:2px solid var(--accent);
+      display:flex;align-items:center;justify-content:center;font-size:1rem;
+      z-index:1;box-shadow:0 0 0 4px rgba(124,111,255,.1);
+    }
+    .edu-content{
+      flex:1;background:rgba(22,27,37,.8);backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);
+      padding:20px 24px;transition:border-color .25s;
+    }
+    .edu-content:hover{border-color:rgba(124,111,255,.35)}
+    .edu-period{font-size:.75rem;color:var(--accent2);font-weight:600;letter-spacing:.5px;margin-bottom:3px}
+    .edu-degree{font-weight:700;color:#fff;font-size:.97rem;margin-bottom:3px}
+    .edu-inst{font-size:.87rem;color:var(--muted)}
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer{
+      background:var(--surface);border-top:1px solid var(--border);
+      padding:36px 7%;display:flex;align-items:center;
+      justify-content:space-between;flex-wrap:wrap;gap:16px;
+      position:relative;z-index:1;
+    }
+    .footer-brand{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+    .avaas-logo{height:26px;width:auto;filter:invert(1) brightness(2);opacity:.85}
+    .footer-contact{font-size:.8rem;color:var(--muted)}
+    .footer-copy{font-size:.8rem;color:var(--muted)}
+    .footer-socials{display:flex;gap:10px}
+    .social-pill{
+      display:inline-flex;align-items:center;gap:6px;
+      background:rgba(255,255,255,.04);border:1px solid var(--border);
+      border-radius:999px;padding:6px 14px;font-size:.78rem;
+      color:var(--muted);text-decoration:none;transition:all .2s;
+    }
+    .social-pill:hover{color:var(--accent);border-color:var(--accent)}
+
+    /* ── REVEAL ──────────────────────────────────────── */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    /* ── MUTE BUTTON ─────────────────────────────────── */
+    #mute-btn{
+      position:fixed;bottom:28px;right:28px;z-index:200;
+      width:46px;height:46px;border-radius:50%;
+      background:rgba(15,18,24,.85);backdrop-filter:blur(12px);
+      border:1px solid var(--border);color:var(--muted);
+      font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+      transition:all .2s;opacity:0;pointer-events:none;
+    }
+    #mute-btn.show{opacity:1;pointer-events:all}
+    #mute-btn:hover{border-color:var(--accent);color:var(--accent)}
+  </style>
+</head>
+<body>
+
+<!-- AUDIO TRACK -->
+<audio id="bg-audio" loop preload="auto">
+  <source src="ambient_piano.ogg" type="audio/ogg" />
+  <source src="ambient.ogg" type="audio/ogg" />
+</audio>
+
+<!-- INTRO OVERLAY -->
+<div id="intro-overlay">
+  <div class="intro-initials">ABY</div>
+  <div class="intro-sub">Akshay Benhynn Yendloori</div>
+  <button id="intro-enter-btn">▶ &nbsp;Enter</button>
+  <div class="intro-bar" id="intro-bar" style="display:none"><div class="intro-bar-fill" id="intro-bar-fill"></div></div>
+</div>
+
+<!-- MUTE BUTTON -->
+<button id="mute-btn" title="Toggle sound">🔊</button>
+
+<!-- ANIMATED BACKGROUND ORBS -->
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Akshay Benhynn Yendloori</span>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#roles">Roles</a>
+    <a href="#publications">Publications</a>
+    <a href="#certs">Certifications</a>
+    <a href="#domain">Expertise</a>
+    <a href="#education">Education</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">Researcher · Builder · Leader</span>
+    <h1>Hi, I'm <span class="name-first">Akshay</span><span class="name-rest">Benhynn Yendloori</span></h1>
+    <div class="hero-subtitle" id="neon-line">
+      <span class="nw">Researcher</span><span class="ndot">·</span>
+      <span class="nw">Entrepreneur</span><span class="ndot">·</span>
+      <span class="nw">Builder</span><span class="ndot">·</span>
+      <span class="nw">Educator</span><span class="ndot">·</span>
+      <span class="nw">Master of Ceremonies</span><span class="ndot">·</span>
+      <span class="nw">Philanthropist</span><span class="ndot">·</span>
+      <span class="nw">Multipotentialite</span><span class="ndot">·</span>
+      <span class="nw">Published Author at 19</span><span class="ndot">·</span>
+      <span class="nw">Speech AI Pioneer</span><span class="ndot">·</span>
+      <span class="nw">Community Architect</span><span class="ndot">·</span>
+      <span class="nw">Global Citizen</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#publications" class="btn btn-primary">📄 View Publications</a>
+      <a href="#roles" class="btn btn-ghost">🚀 My Roles</a>
+    </div>
+  </div>
+  <div class="hero-photo-wrap">
+    <div class="hero-photo-ring"></div>
+    <div class="hero-photo-ring2"></div>
+    <img src="akshay_photo.png" alt="Akshay Benhynn Yendloori"/>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About Me</div>
+  <h2 class="section-title">A quick introduction</h2>
+  <p class="section-desc">Third-year B.Tech AIML student with a deep focus on speech systems, HCI, and responsible AI — balancing research, leadership, and entrepreneurship.</p>
+  <div class="about-grid reveal">
+    <div class="about-card">
+      <h3>🎓 Academic Background</h3>
+      <p>B.Tech AIML (3rd year) at Malla Reddy University. Cambridge academic programme alumnus. Certified C1 English speaker. Alumni of St. Andrews School.</p>
+    </div>
+    <div class="about-card">
+      <h3>🔬 Research Focus</h3>
+      <p>Peer-reviewed publications at ACM CHI, IEEE ICASSP, ACM FAccT, NeurIPS, and Interspeech 2027, spanning HCI, Speech Processing, and Responsible AI.</p>
+    </div>
+    <div class="about-card">
+      <h3>💼 Entrepreneurship</h3>
+      <p>CEO of AVAAS Speech Systems Pvt. Ltd. and CTO of Zuro Labs Healthcare LLP — building real-world AI products at the frontier of voice and healthcare technology.</p>
+    </div>
+    <div class="about-card">
+      <h3>🌐 Community Leadership</h3>
+      <p>ACM &amp; IEEE Student Chapter Chair, TEDx Curator, MRU Research Society Chairperson, and MUN Vice President — shaping the next generation of innovators.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ROLES -->
+<section id="roles">
+  <div class="section-label">Current Roles</div>
+  <h2 class="section-title">Where I lead</h2>
+  <p class="section-desc">Across academia, industry, and community.</p>
+  <div class="roles-grid">
+    <div class="role-card reveal">
+      <img src="logo_avaas.png" alt="AVAAS" style="height:24px;margin-bottom:14px;display:block;filter:invert(1) brightness(2);opacity:.9;"/>
+      <div class="role-org">AVAAS Speech Systems Pvt. Ltd.</div>
+      <div class="role-title">Chief Executive Officer (CEO)</div>
+    </div>
+    <div class="role-card reveal">
+      <img src="logo_zuro.png" alt="Zuro" style="height:42px;margin-bottom:10px;display:block;"/>
+      <div class="role-org">Zuro Labs Healthcare LLP</div>
+      <div class="role-title">Chief Technology Officer (CTO)</div>
+    </div>
+    <div class="role-card reveal">
+      <img src="logo_acm.png" alt="ACM MRU" style="height:44px;margin-bottom:10px;display:block;"/>
+      <div class="role-org">ACM — Malla Reddy University</div>
+      <div class="role-title">Student Chapter Chair</div>
+    </div>
+    <div class="role-card reveal">
+      <img src="logo_ieee.png" alt="IEEE MRU" style="height:36px;max-width:150px;margin-bottom:10px;display:block;"/>
+      <div class="role-org">IEEE — Malla Reddy University</div>
+      <div class="role-title">Student Branch Chair</div>
+    </div>
+    <div class="role-card reveal">
+      <img src="logo_uris.jpg" alt="MRU URIS" style="height:48px;border-radius:6px;margin-bottom:10px;display:block;"/>
+      <div class="role-org">Malla Reddy University</div>
+      <div class="role-title">Chairperson — Undergraduate Research &amp; Innovation Society</div>
+    </div>
+    <div class="role-card reveal">
+      <img src="logo_tedx.png" alt="TEDx MRU" style="height:26px;margin-bottom:14px;display:block;"/>
+      <div class="role-org">TEDx Malla Reddy University</div>
+      <div class="role-title">Curator</div>
+    </div>
+    <div class="role-card reveal">
+      <img src="logo_mun.png" alt="MRU MUN" style="height:48px;border-radius:50%;margin-bottom:10px;display:block;"/>
+      <div class="role-org">Model United Nations — Malla Reddy University</div>
+      <div class="role-title">Vice President</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-label">Publications</div>
+  <h2 class="section-title">Peer-reviewed research</h2>
+  <p class="section-desc">Top-tier international venues spanning HCI, Speech Processing, and Responsible AI.</p>
+  <div class="pub-list">
+    <div class="pub-card reveal">
+      <div class="pub-badge chi">🖱️</div>
+      <div>
+        <div class="pub-venue chi">ACM CHI 2027</div>
+        <div class="pub-title">Published Author — ACM CHI Conference on Human Factors in Computing Systems</div>
+        <span class="pub-year">2027</span>
+      </div>
+    </div>
+    <div class="pub-card reveal">
+      <div class="pub-badge ieee">🔊</div>
+      <div>
+        <div class="pub-venue ieee">IEEE ICASSP 2027</div>
+        <div class="pub-title">Published Author — IEEE International Conference on Acoustics, Speech and Signal Processing</div>
+        <span class="pub-year">2027</span>
+      </div>
+    </div>
+    <div class="pub-card reveal">
+      <div class="pub-badge facct">⚖️</div>
+      <div>
+        <div class="pub-venue facct">ACM FAccT 2027</div>
+        <div class="pub-title">Published Author — ACM Conference on Fairness, Accountability, and Transparency</div>
+        <span class="pub-year">2027</span>
+      </div>
+    </div>
+    <div class="pub-card reveal">
+      <div class="pub-badge" style="background:rgba(255,110,180,.15)">🧠</div>
+      <div>
+        <div class="pub-venue" style="color:#ff6eb4;font-size:.7rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:4px">NeurIPS 2027</div>
+        <div class="pub-title">Published Author — Neural Information Processing Systems</div>
+        <span class="pub-year">2027</span>
+      </div>
+    </div>
+    <div class="pub-card reveal">
+      <div class="pub-badge" style="background:rgba(255,180,50,.15)">🎙️</div>
+      <div>
+        <div class="pub-venue" style="color:#ffb432;font-size:.7rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:4px">Interspeech 2027</div>
+        <div class="pub-title">Published Author — ISCA Interspeech Conference</div>
+        <span class="pub-year">2027</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="section-label">Certifications &amp; Achievements</div>
+  <h2 class="section-title">Credentials that matter</h2>
+  <p class="section-desc">Academic, language, and professional milestones.</p>
+  <div class="cert-grid">
+    <div class="cert-card reveal"><span class="cert-icon">🎩</span><div class="cert-name">University of Cambridge</div><div class="cert-sub">Cambridge Academic Programme — Attendee</div></div>
+    <div class="cert-card reveal"><span class="cert-icon">🇬🇧</span><div class="cert-name">English C1 Proficiency</div><div class="cert-sub">Cambridge English — C1 Advanced Certificate</div></div>
+    <div class="cert-card reveal"><span class="cert-icon">🖱️</span><div class="cert-name">ACM CHI 2027</div><div class="cert-sub">Author Certification — Human Factors in Computing Systems</div></div>
+    <div class="cert-card reveal"><span class="cert-icon">📡</span><div class="cert-name">IEEE ICASSP 2027</div><div class="cert-sub">Author Certification — Acoustics, Speech &amp; Signal Processing</div></div>
+    <div class="cert-card reveal"><span class="cert-icon">⚖️</span><div class="cert-name">ACM FAccT 2027</div><div class="cert-sub">Author Certification — Fairness, Accountability &amp; Transparency</div></div>
+    <div class="cert-card reveal"><span class="cert-icon">🧠</span><div class="cert-name">NeurIPS 2027</div><div class="cert-sub">Author Certification — Neural Information Processing Systems</div></div>
+    <div class="cert-card reveal"><span class="cert-icon">🎙️</span><div class="cert-name">Interspeech 2027</div><div class="cert-sub">Author Certification — ISCA Interspeech Conference</div></div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- DOMAIN -->
+<section id="domain">
+  <div class="section-label">Domain Expertise</div>
+  <h2 class="section-title">What I work on</h2>
+  <p class="section-desc">My technical stack spans multiple sub-fields of Speech AI and broader ML systems.</p>
+  <div class="domain-grid">
+    <div class="domain-card reveal"><div class="domain-icon">🗣️</div><div class="domain-name">Speech Recognition (ASR)</div><div class="domain-desc">Acoustic modelling, end-to-end ASR, large vocabulary continuous speech recognition.</div></div>
+    <div class="domain-card reveal"><div class="domain-icon">🔊</div><div class="domain-name">Text-to-Speech (TTS)</div><div class="domain-desc">Neural TTS, voice cloning, prosody modelling, and expressive speech generation.</div></div>
+    <div class="domain-card reveal"><div class="domain-icon">🎙️</div><div class="domain-name">Speaker Verification &amp; Diarization</div><div class="domain-desc">Biometric identification, speaker segmentation, and verification pipelines.</div></div>
+    <div class="domain-card reveal"><div class="domain-icon">🌐</div><div class="domain-name">Multilingual &amp; Low-Resource NLP</div><div class="domain-desc">Cross-lingual transfer, Indic language processing, low-resource speech models.</div></div>
+    <div class="domain-card reveal"><div class="domain-icon">😶‍🌫️</div><div class="domain-name">Speech Emotion Recognition</div><div class="domain-desc">Affective computing, paralinguistic features, emotion-aware conversational AI.</div></div>
+    <div class="domain-card reveal"><div class="domain-icon">🤖</div><div class="domain-name">Conversational AI</div><div class="domain-desc">Spoken dialogue systems, voice assistants, task-oriented speech interfaces.</div></div>
+    <div class="domain-card reveal"><div class="domain-icon">⚖️</div><div class="domain-name">Fairness &amp; Responsible AI</div><div class="domain-desc">Bias detection in speech models, equitable benchmarking, accountable ML.</div></div>
+    <div class="domain-card reveal"><div class="domain-icon">🏥</div><div class="domain-name">Healthcare Speech AI</div><div class="domain-desc">Clinical speech analytics, voice pathology detection, AI-assisted diagnostics.</div></div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">Education</div>
+  <h2 class="section-title">Academic journey</h2>
+  <p class="section-desc">From school to a globally recognised university and beyond.</p>
+  <div class="edu-timeline">
+    <div class="edu-item reveal">
+      <div class="edu-dot">🎓</div>
+      <div class="edu-content">
+        <div class="edu-period">2023 – Present</div>
+        <div class="edu-degree">B.Tech in Artificial Intelligence &amp; Machine Learning (3rd Year)</div>
+        <div class="edu-inst">Malla Reddy University, Hyderabad</div>
+      </div>
+    </div>
+    <div class="edu-item reveal">
+      <div class="edu-dot">🎩</div>
+      <div class="edu-content">
+        <div class="edu-period">Cambridge, UK</div>
+        <div class="edu-degree">Academic Programme</div>
+        <div class="edu-inst">University of Cambridge</div>
+      </div>
+    </div>
+    <div class="edu-item reveal">
+      <div class="edu-dot">🏫</div>
+      <div class="edu-content">
+        <div class="edu-period">School</div>
+        <div class="edu-degree">Higher Secondary Education</div>
+        <div class="edu-inst">St. Andrews School — Alumni</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img src="logo_avaas.png" alt="AVAAS" class="avaas-logo"/>
+    <span class="footer-contact">📧 <a href="mailto:ceo@avaas.me" style="color:var(--muted);text-decoration:none">ceo@avaas.me</a></span>
+  </div>
+  <div class="footer-copy">© 2026 · Akshay Benhynn Yendloori · All rights reserved</div>
+  <div class="footer-socials">
+    <a href="mailto:ceo@avaas.me" class="social-pill">📧 Contact</a>
+    <a href="#" class="social-pill">💼 LinkedIn</a>
+    <a href="#" class="social-pill">🔬 Scholar</a>
+  </div>
+</footer>
+
+<script>
+/* ── SCROLL REVEAL ───────────────────────────────────── */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+/* ── NEON SWEEP ──────────────────────────────────────── */
+const nwSpans = document.querySelectorAll('.nw');
+let nwIdx = 0;
+function neonSweep() {
+  nwSpans.forEach(s => s.classList.remove('lit'));
+  nwSpans[nwIdx].classList.add('lit');
+  nwIdx = (nwIdx + 1) % nwSpans.length;
+}
+neonSweep();
+setInterval(neonSweep, 900);
+
+/* ── HIGH-QUALITY NEOCLASSICAL AMBIENT PIANO AUDIO ───────────────────────────── */
+const bgAudio = document.getElementById('bg-audio');
+
+function playIntroSound() {
+  if (!bgAudio) return;
+  bgAudio.volume = 0;
+  bgAudio.play().then(() => {
+    let vol = 0;
+    const fadeInterval = setInterval(() => {
+      if (vol < 0.45) {
+        vol += 0.02;
+        bgAudio.volume = Math.min(0.45, vol);
+      } else {
+        clearInterval(fadeInterval);
+      }
+    }, 100);
+  }).catch(e => console.warn('Audio play prevented:', e));
+
+  const muteBtn = document.getElementById('mute-btn');
+  muteBtn.classList.add('show');
+  muteBtn.onclick = () => {
+    bgAudio.muted = !bgAudio.muted;
+    muteBtn.textContent = bgAudio.muted ? '🔇' : '🔊';
+  };
+}
+
+/* ── INTRO SEQUENCE — click-triggered for audio unlock ── */
+document.body.style.overflow = 'hidden';
+
+document.getElementById('intro-enter-btn').addEventListener('click', function() {
+  // Hide the button, show and start the progress bar
+  this.style.opacity = '0';
+  this.style.pointerEvents = 'none';
+  const bar = document.getElementById('intro-bar');
+  const fill = document.getElementById('intro-bar-fill');
+  bar.style.display = 'block';
+  requestAnimationFrame(() => requestAnimationFrame(() => fill.classList.add('go')));
+
+  // Play the soothing neoclassical ambient piano track
+  playIntroSound();
+
+  // Fade out overlay after 4.5s
+  setTimeout(() => {
+    const overlay = document.getElementById('intro-overlay');
+    overlay.classList.add('fade-out');
+    document.body.style.overflow = '';
+    overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
+  }, 4500);
+});
+</script>
+</body>
+</html>
