@@ -59,366 +59,314 @@
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --bg:#07090f;--surface:#0f1218;--surface2:#161b25;--surface3:#1d2333;
-      --border:#1e2535;--accent:#7c6fff;--accent2:#00e5b8;--accent3:#ffb432;
-      --pink:#ff6eb4;--text:#eceef5;--muted:#6b7280;--radius:16px;
-      --glow-purple:rgba(124,111,255,.25);--glow-teal:rgba(0,229,184,.2);
+      --bg:#090a0d;
+      --surface:#111319;
+      --surface2:#171a22;
+      --border:rgba(212,175,55,0.14);
+      --border-light:rgba(255,255,255,0.08);
+      --accent:#d4af37;
+      --accent-glow:rgba(212,175,55,0.35);
+      --accent-soft:rgba(212,175,55,0.08);
+      --text:#f1f3f7;
+      --muted:#9197a3;
+      --radius:14px;
     }
     html{scroll-behavior:smooth}
-    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.75;overflow-x:hidden}
 
-    /* ── INTRO OVERLAY ───────────────────────────────── */
+    /* ── ELEGANT INTRO CURTAIN ───────────────────────────── */
     #intro-overlay{
       position:fixed;inset:0;z-index:9999;
-      background:#000;
+      background:radial-gradient(circle at center,#141720 0%,#07080a 100%);
       display:flex;flex-direction:column;align-items:center;justify-content:center;
-      gap:24px;
-      transition:opacity .8s ease, visibility .8s ease;
+      gap:28px;
+      transition:transform 1.1s cubic-bezier(0.77,0,0.175,1), opacity 0.8s ease;
     }
-    #intro-overlay.fade-out{opacity:0;visibility:hidden;pointer-events:none}
-    .intro-initials{
+    #intro-overlay.fade-out{
+      transform:translateY(-100%);
+      pointer-events:none;
+    }
+    .intro-brand{
+      display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;
+    }
+    .intro-monogram{
+      font-family:'Cinzel',serif;font-size:1rem;font-weight:700;letter-spacing:6px;
+      color:var(--accent);text-transform:uppercase;margin-bottom:6px;
+    }
+    .intro-name{
       font-family:'Playfair Display',serif;
-      font-size:clamp(3rem,10vw,7rem);
-      font-weight:800;
-      letter-spacing:-.02em;
-      background:linear-gradient(135deg,#fff 0%,var(--accent2) 50%,var(--accent) 100%);
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      background-clip:text;
-      opacity:0;
-      animation:introFadeIn .8s .3s forwards;
+      font-size:clamp(2.4rem,6vw,4.5rem);
+      font-weight:700;letter-spacing:-0.02em;
+      background:linear-gradient(135deg,#ffffff 0%,#f0e3c4 50%,#d4af37 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
     }
-    .intro-sub{
-      font-size:.85rem;letter-spacing:4px;text-transform:uppercase;
-      color:rgba(255,255,255,.35);
-      opacity:0;animation:introFadeIn .8s .7s forwards;
+    .intro-subtitle{
+      font-size:.78rem;letter-spacing:4px;text-transform:uppercase;
+      color:var(--muted);font-weight:500;
     }
-    .intro-bar{
-      width:180px;height:2px;background:var(--border);border-radius:999px;overflow:hidden;
-      opacity:0;animation:introFadeIn .8s .9s forwards;
-    }
-    .intro-bar-fill{
-      height:100%;width:0;border-radius:999px;
-      background:linear-gradient(90deg,var(--accent),var(--accent2));
-      transition:width 4s ease-out;
-    }
-    .intro-bar-fill.go{width:100%}
-    @keyframes introFadeIn{to{opacity:1}}
     #intro-enter-btn{
-      margin-top:10px;
-      padding:14px 44px;border-radius:999px;
-      border:1.5px solid rgba(0,229,184,.5);
-      background:rgba(0,229,184,.08);
-      color:var(--accent2);
-      font-size:.88rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
-      cursor:pointer;transition:all .25s;
-      animation:introFadeIn .8s 1.1s forwards;opacity:0;
-      box-shadow:0 0 24px rgba(0,229,184,.15),inset 0 0 20px rgba(0,229,184,.05);
+      margin-top:16px;
+      padding:16px 48px;border-radius:999px;
+      border:1px solid rgba(212,175,55,0.4);
+      background:rgba(212,175,55,0.06);
+      color:var(--accent);
+      font-family:'Cinzel',serif;
+      font-size:.82rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+      cursor:pointer;transition:all .35s ease;
+      box-shadow:0 0 20px rgba(212,175,55,0.1);
     }
     #intro-enter-btn:hover{
-      background:rgba(0,229,184,.18);
-      border-color:rgba(0,229,184,.9);
-      box-shadow:0 0 40px rgba(0,229,184,.45),0 0 80px rgba(0,229,184,.2);
-      transform:scale(1.05);
+      background:rgba(212,175,55,0.16);
+      border-color:var(--accent);
+      box-shadow:0 0 35px rgba(212,175,55,0.3);
+      transform:scale(1.04);
     }
 
-    /* ── ANIMATED BG ORBS ────────────────────────────── */
-    .orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;animation:drift 20s ease-in-out infinite alternate}
-    .orb1{width:600px;height:600px;background:rgba(124,111,255,.12);top:-200px;right:-100px;animation-delay:0s}
-    .orb2{width:500px;height:500px;background:rgba(0,229,184,.09);bottom:-150px;left:-100px;animation-delay:-7s}
-    .orb3{width:350px;height:350px;background:rgba(255,110,180,.07);top:50%;left:50%;animation-delay:-13s}
-    @keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(40px,30px) scale(1.08)}}
-
-    /* ── GRID TEXTURE ────────────────────────────────── */
-    body::before{
-      content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-      background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-                       linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-      background-size:50px 50px;
+    /* ── SUBTLE AMBIENT BACKGROUND ─────────────────────── */
+    .bg-glow{
+      position:fixed;top:-200px;left:50%;transform:translateX(-50%);
+      width:900px;height:600px;
+      background:radial-gradient(ellipse at center,rgba(212,175,55,0.05) 0%,transparent 70%);
+      pointer-events:none;z-index:0;
     }
 
-    /* ── NAV ─────────────────────────────────────────── */
+    /* ── NAVIGATION ───────────────────────────────────── */
     nav{
       position:fixed;top:0;left:0;right:0;z-index:100;
       display:flex;align-items:center;justify-content:space-between;
-      padding:16px 7%;
-      background:rgba(7,9,15,.8);
-      backdrop-filter:blur(20px);
-      border-bottom:1px solid var(--border);
+      padding:20px 8%;
+      background:rgba(9,10,13,0.85);
+      backdrop-filter:blur(24px);
+      border-bottom:1px solid var(--border-light);
     }
     .nav-logo{
-      font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;
-      background:linear-gradient(90deg,#fff,var(--accent2));
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      font-family:'Cinzel',serif;font-size:1.05rem;font-weight:700;letter-spacing:1px;
+      color:var(--text);text-decoration:none;
     }
-    .nav-links{display:flex;gap:28px}
+    .nav-links{display:flex;gap:32px}
     .nav-links a{
-      color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:500;
-      letter-spacing:.3px;transition:color .2s;position:relative;
+      color:var(--muted);text-decoration:none;font-size:.84rem;font-weight:500;
+      letter-spacing:.5px;transition:color .25s ease;position:relative;
     }
     .nav-links a::after{
-      content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;
-      background:var(--accent2);transform:scaleX(0);transition:transform .25s;
+      content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;
+      background:var(--accent);transform:scaleX(0);transition:transform .25s ease;
     }
-    .nav-links a:hover{color:var(--accent2)}
+    .nav-links a:hover{color:var(--text)}
     .nav-links a:hover::after{transform:scaleX(1)}
 
     /* ── HERO ────────────────────────────────────────── */
     .hero{
       min-height:100vh;display:flex;align-items:center;
       justify-content:space-between;gap:60px;
-      padding:120px 7% 80px;
+      padding:130px 8% 90px;
       position:relative;z-index:1;
     }
-    .hero-inner{max-width:680px;position:relative;z-index:1}
+    .hero-inner{max-width:640px}
     .hero-tag{
-      display:inline-flex;align-items:center;gap:8px;
-      font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
-      color:var(--accent2);
-      background:rgba(0,229,184,.08);
-      border:1px solid rgba(0,229,184,.2);
-      padding:7px 18px;border-radius:999px;margin-bottom:28px;
+      display:inline-block;
+      font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+      color:var(--accent);background:var(--accent-soft);
+      border:1px solid var(--border);
+      padding:6px 18px;border-radius:999px;margin-bottom:28px;
     }
-    .hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent2);display:inline-block;animation:pulse 2s infinite}
-    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
     .hero h1{
       font-family:'Playfair Display',serif;
-      font-size:clamp(2.6rem,5.5vw,4.8rem);
-      line-height:1.08;color:#fff;margin-bottom:10px;
+      font-size:clamp(2.6rem,5.2vw,4.6rem);
+      line-height:1.12;color:#fff;margin-bottom:12px;
     }
     .hero h1 .name-first{color:var(--accent);font-style:italic}
     .hero h1 .name-rest{display:block;color:#fff}
     .hero-subtitle{
       display:flex;flex-wrap:wrap;gap:6px 10px;
-      align-items:center;margin:26px 0 38px;
+      align-items:center;margin:28px 0 40px;
       min-height:40px;
     }
     .nw{
-      color:rgba(255,255,255,.28);font-size:.95rem;font-weight:500;
+      color:var(--muted);font-size:.95rem;font-weight:500;
       transition:color .35s,text-shadow .35s,transform .35s;
       cursor:default;white-space:nowrap;
     }
     .nw.lit{
       color:#fff;font-weight:700;
-      text-shadow:0 0 6px var(--accent2),0 0 18px var(--accent2),0 0 40px rgba(0,229,184,.4);
-      transform:scale(1.04);
+      text-shadow:0 0 12px var(--accent-glow);
+      transform:scale(1.03);
     }
-    .ndot{color:var(--border);font-size:.85rem;line-height:1}
-    .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+    .ndot{color:rgba(255,255,255,0.15);font-size:.85rem}
+    .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
     .btn{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:13px 28px;border-radius:999px;font-size:.88rem;font-weight:600;
-      text-decoration:none;transition:all .25s;letter-spacing:.2px;
+      display:inline-flex;align-items:center;gap:10px;
+      padding:14px 30px;border-radius:999px;font-size:.85rem;font-weight:600;
+      text-decoration:none;transition:all .3s ease;letter-spacing:.5px;
+      font-family:'Cinzel',serif;
     }
     .btn-primary{
-      background:linear-gradient(135deg,var(--accent),#9c6dff);
-      color:#fff;box-shadow:0 4px 24px rgba(124,111,255,.3);
+      background:var(--accent);color:#0a0b0e;
+      box-shadow:0 4px 20px rgba(212,175,55,0.25);
     }
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(124,111,255,.45)}
-    .btn-ghost{color:var(--text);border:1px solid var(--border);backdrop-filter:blur(8px)}
+    .btn-primary:hover{background:#e5c158;transform:translateY(-2px);box-shadow:0 8px 30px rgba(212,175,55,0.4)}
+    .btn-ghost{color:var(--text);border:1px solid var(--border-light);backdrop-filter:blur(8px)}
     .btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
 
-    /* ── PHOTO ───────────────────────────────────────── */
+    /* ── PHOTO FRAME (EDITORIAL ELEGANCE) ─────────────── */
     .hero-photo-wrap{flex-shrink:0;position:relative;z-index:1}
     .hero-photo-wrap img{
-      width:290px;height:290px;object-fit:cover;border-radius:50%;
-      border:3px solid rgba(124,111,255,.5);
-      box-shadow:0 0 0 10px rgba(124,111,255,.08),0 0 60px rgba(124,111,255,.2),0 30px 70px rgba(0,0,0,.6);
+      width:290px;height:340px;object-fit:cover;border-radius:20px;
+      border:1px solid var(--border);
+      box-shadow:0 20px 50px rgba(0,0,0,0.8), 0 0 40px rgba(212,175,55,0.08);
       display:block;
+      transition:transform .5s cubic-bezier(0.2,1,0.3,1), border-color .5s;
     }
-    .hero-photo-ring{
-      position:absolute;inset:-20px;border-radius:50%;
-      border:1.5px dashed rgba(0,229,184,.3);
-      animation:spin 18s linear infinite;pointer-events:none;
+    .hero-photo-wrap:hover img{
+      transform:scale(1.02);
+      border-color:rgba(212,175,55,0.4);
     }
-    .hero-photo-ring2{
-      position:absolute;inset:-36px;border-radius:50%;
-      border:1px dashed rgba(124,111,255,.2);
-      animation:spin 30s linear infinite reverse;pointer-events:none;
-    }
-    @keyframes spin{to{transform:rotate(360deg)}}
 
-    /* ── SECTIONS ────────────────────────────────────── */
-    section{padding:90px 7%;position:relative;z-index:1}
+    /* ── SECTIONS & CARDS ────────────────────────────── */
+    section{padding:100px 8%;position:relative;z-index:1}
     .section-label{
-      font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-      background:linear-gradient(90deg,var(--accent),var(--accent2));
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-      margin-bottom:10px;
+      font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+      color:var(--accent);margin-bottom:10px;
     }
     .section-title{
       font-family:'Playfair Display',serif;
-      font-size:clamp(1.8rem,3.5vw,2.5rem);
-      color:#fff;margin-bottom:12px;
+      font-size:clamp(1.9rem,3.5vw,2.7rem);
+      color:#fff;margin-bottom:14px;
     }
-    .section-desc{color:var(--muted);max-width:540px;font-size:.93rem;margin-bottom:48px}
-    hr.divider{border:none;border-top:1px solid var(--border);margin:0;position:relative;z-index:1}
-
-    /* ── GLASS CARD BASE ─────────────────────────────── */
-    .glass{
-      background:rgba(15,18,24,.7);
-      backdrop-filter:blur(16px);
-      border:1px solid rgba(255,255,255,.07);
-      border-radius:var(--radius);
-    }
-    .glass:hover{border-color:rgba(124,111,255,.35)}
+    .section-desc{color:var(--muted);max-width:540px;font-size:.95rem;margin-bottom:50px}
+    hr.divider{border:none;border-top:1px solid var(--border-light);margin:0;position:relative;z-index:1}
 
     /* ── ABOUT ───────────────────────────────────────── */
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:10px}
-    @media(max-width:700px){.about-grid{grid-template-columns:1fr}.nav-links{display:none}}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:10px}
+    @media(max-width:750px){.about-grid{grid-template-columns:1fr}.nav-links{display:none}}
     .about-card{
-      background:rgba(15,18,24,.7);backdrop-filter:blur(16px);
-      border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);
-      padding:28px;position:relative;overflow:hidden;
-      transition:border-color .25s,transform .25s;
+      background:var(--surface);
+      border:1px solid var(--border-light);border-radius:var(--radius);
+      padding:32px;position:relative;overflow:hidden;
+      transition:border-color .3s,transform .3s;
     }
-    .about-card::before{
-      content:'';position:absolute;top:0;left:0;right:0;height:2px;
-      background:linear-gradient(90deg,var(--accent),var(--accent2),var(--pink));
-      opacity:0;transition:opacity .3s;
-    }
-    .about-card:hover{border-color:rgba(124,111,255,.35);transform:translateY(-3px)}
-    .about-card:hover::before{opacity:1}
-    .about-card h3{font-size:1rem;font-weight:700;margin-bottom:10px;color:#fff}
-    .about-card p{color:var(--muted);font-size:.9rem;line-height:1.75}
+    .about-card:hover{border-color:var(--border);transform:translateY(-4px)}
+    .about-card h3{font-family:'Cinzel',serif;font-size:.95rem;font-weight:700;letter-spacing:1px;margin-bottom:12px;color:var(--accent)}
+    .about-card p{color:var(--muted);font-size:.92rem;line-height:1.75}
 
     /* ── ROLES ───────────────────────────────────────── */
-    #roles{background:linear-gradient(180deg,var(--surface) 0%,var(--bg) 100%)}
-    .roles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
+    #roles{background:var(--surface)}
+    .roles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
     .role-card{
-      background:rgba(22,27,37,.8);backdrop-filter:blur(16px);
-      border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);
-      padding:26px;position:relative;overflow:hidden;
+      background:var(--surface2);
+      border:1px solid var(--border-light);border-radius:var(--radius);
+      padding:28px;position:relative;overflow:hidden;
       transition:transform .3s,border-color .3s,box-shadow .3s;
-    }
-    .role-card::before{
-      content:'';position:absolute;top:0;left:0;right:0;height:2px;
-      background:linear-gradient(90deg,var(--accent),var(--accent2));
     }
     .role-card:hover{
       transform:translateY(-5px);
-      border-color:rgba(124,111,255,.4);
-      box-shadow:0 12px 40px rgba(124,111,255,.15);
+      border-color:var(--border);
+      box-shadow:0 12px 35px rgba(0,0,0,0.5);
     }
     .role-org{
-      font-size:.7rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
-      color:var(--accent2);margin-bottom:8px;
+      font-family:'Cinzel',serif;font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+      color:var(--accent);margin-bottom:10px;
     }
-    .role-title{font-size:.97rem;font-weight:700;color:#fff;line-height:1.4;user-select:text}
+    .role-title{font-size:.98rem;font-weight:600;color:#fff;line-height:1.45;user-select:text}
 
     /* ── PUBLICATIONS ────────────────────────────────── */
-    .pub-list{display:flex;flex-direction:column;gap:16px}
+    .pub-list{display:flex;flex-direction:column;gap:18px}
     .pub-card{
-      background:rgba(15,18,24,.7);backdrop-filter:blur(16px);
-      border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);
-      padding:22px 26px;display:flex;gap:20px;align-items:flex-start;
-      transition:border-color .25s,transform .25s,box-shadow .25s;
+      background:var(--surface);
+      border:1px solid var(--border-light);border-radius:var(--radius);
+      padding:24px 30px;display:flex;gap:24px;align-items:center;justify-content:space-between;
+      transition:border-color .3s,transform .3s;
     }
-    .pub-card:hover{border-color:rgba(124,111,255,.35);transform:translateX(4px);box-shadow:-4px 0 20px rgba(124,111,255,.1)}
-    .pub-badge{
-      flex-shrink:0;width:48px;height:48px;border-radius:12px;
-      display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+    .pub-card:hover{border-color:var(--border);transform:translateX(4px)}
+    .pub-tag{
+      flex-shrink:0;font-family:'Cinzel',serif;font-size:.75rem;font-weight:700;
+      letter-spacing:1.5px;color:var(--accent);
+      background:var(--accent-soft);border:1px solid var(--border);
+      padding:6px 14px;border-radius:6px;
     }
-    .pub-badge.chi{background:rgba(124,111,255,.15)}
-    .pub-badge.ieee{background:rgba(0,229,184,.15)}
-    .pub-badge.facct{background:rgba(255,180,50,.15)}
-    .pub-venue{font-size:.7rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:4px}
-    .pub-venue.chi{color:var(--accent)}
-    .pub-venue.ieee{color:var(--accent2)}
-    .pub-venue.facct{color:var(--accent3)}
-    .pub-title{font-size:.95rem;font-weight:600;color:#fff;margin-bottom:6px}
+    .pub-title{font-size:.98rem;font-weight:600;color:#fff;margin-bottom:4px}
+    .pub-venue-detail{font-size:.82rem;color:var(--muted)}
     .pub-year{
-      font-size:.75rem;color:var(--muted);
-      background:rgba(255,255,255,.06);border:1px solid var(--border);
-      border-radius:999px;padding:2px 10px;display:inline-block;
+      font-family:'Cinzel',serif;font-size:.78rem;color:var(--muted);
+      border:1px solid var(--border-light);
+      border-radius:999px;padding:3px 12px;
     }
 
     /* ── CERTS ───────────────────────────────────────── */
-    #certs{background:linear-gradient(180deg,var(--bg) 0%,var(--surface) 100%)}
-    .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    #certs{background:var(--surface)}
+    .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
     .cert-card{
-      background:rgba(22,27,37,.8);backdrop-filter:blur(16px);
-      border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);
-      padding:28px 22px;text-align:center;
-      transition:transform .25s,border-color .25s,box-shadow .25s;
-      position:relative;overflow:hidden;
+      background:var(--surface2);
+      border:1px solid var(--border-light);border-radius:var(--radius);
+      padding:28px 24px;text-align:left;
+      transition:transform .3s,border-color .3s;
     }
-    .cert-card::after{
-      content:'';position:absolute;inset:0;border-radius:var(--radius);
-      background:radial-gradient(ellipse at top center,rgba(0,229,184,.06) 0%,transparent 70%);
-      opacity:0;transition:opacity .3s;
+    .cert-card:hover{transform:translateY(-5px);border-color:var(--border)}
+    .cert-badge-tag{
+      font-family:'Cinzel',serif;font-size:.65rem;font-weight:700;letter-spacing:1.5px;
+      color:var(--accent);text-transform:uppercase;margin-bottom:12px;display:inline-block;
     }
-    .cert-card:hover{transform:translateY(-5px);border-color:rgba(0,229,184,.35);box-shadow:0 12px 40px rgba(0,229,184,.1)}
-    .cert-card:hover::after{opacity:1}
-    .cert-icon{font-size:2.2rem;margin-bottom:14px;display:block}
-    .cert-name{font-weight:700;font-size:.95rem;color:#fff;margin-bottom:5px}
-    .cert-sub{font-size:.8rem;color:var(--muted)}
+    .cert-name{font-weight:700;font-size:.95rem;color:#fff;margin-bottom:6px}
+    .cert-sub{font-size:.82rem;color:var(--muted)}
 
     /* ── DOMAIN ──────────────────────────────────────── */
-    .domain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+    .domain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
     .domain-card{
-      background:rgba(15,18,24,.7);backdrop-filter:blur(16px);
-      border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);
-      padding:22px;transition:transform .25s,border-color .25s,box-shadow .25s;
-      position:relative;overflow:hidden;
+      background:var(--surface);
+      border:1px solid var(--border-light);border-radius:var(--radius);
+      padding:24px;transition:transform .3s,border-color .3s;
     }
-    .domain-card::before{
-      content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
-      background:linear-gradient(90deg,transparent,var(--accent2),transparent);
-      opacity:0;transition:opacity .3s;
-    }
-    .domain-card:hover{transform:translateY(-4px);border-color:rgba(124,111,255,.35);box-shadow:0 10px 30px rgba(124,111,255,.12)}
-    .domain-card:hover::before{opacity:1}
-    .domain-icon{font-size:1.7rem;margin-bottom:10px}
-    .domain-name{font-weight:700;color:#fff;font-size:.93rem;margin-bottom:5px}
-    .domain-desc{font-size:.8rem;color:var(--muted);line-height:1.6}
+    .domain-card:hover{transform:translateY(-4px);border-color:var(--border)}
+    .domain-name{font-family:'Cinzel',serif;font-weight:700;color:var(--text);font-size:.88rem;letter-spacing:.5px;margin-bottom:8px}
+    .domain-desc{font-size:.82rem;color:var(--muted);line-height:1.65}
 
     /* ── EDUCATION ───────────────────────────────────── */
-    #education{background:linear-gradient(180deg,var(--surface) 0%,var(--bg) 100%)}
+    #education{background:var(--surface)}
     .edu-timeline{display:flex;flex-direction:column;position:relative}
     .edu-timeline::before{
       content:'';position:absolute;left:19px;top:0;bottom:0;
-      width:2px;background:linear-gradient(180deg,var(--accent),var(--accent2),transparent);
+      width:1px;background:var(--border);
     }
-    .edu-item{display:flex;gap:24px;padding-bottom:32px;position:relative}
+    .edu-item{display:flex;gap:24px;padding-bottom:36px;position:relative}
     .edu-dot{
       flex-shrink:0;width:40px;height:40px;border-radius:50%;
-      background:var(--surface2);border:2px solid var(--accent);
-      display:flex;align-items:center;justify-content:center;font-size:1rem;
-      z-index:1;box-shadow:0 0 0 4px rgba(124,111,255,.1);
+      background:var(--surface2);border:1px solid var(--accent);
+      display:flex;align-items:center;justify-content:center;
+      z-index:1;color:var(--accent);font-family:'Cinzel',serif;font-size:.8rem;font-weight:700;
     }
     .edu-content{
-      flex:1;background:rgba(22,27,37,.8);backdrop-filter:blur(16px);
-      border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);
-      padding:20px 24px;transition:border-color .25s;
+      flex:1;background:var(--surface2);
+      border:1px solid var(--border-light);border-radius:var(--radius);
+      padding:24px 28px;transition:border-color .3s;
     }
-    .edu-content:hover{border-color:rgba(124,111,255,.35)}
-    .edu-period{font-size:.75rem;color:var(--accent2);font-weight:600;letter-spacing:.5px;margin-bottom:3px}
-    .edu-degree{font-weight:700;color:#fff;font-size:.97rem;margin-bottom:3px}
-    .edu-inst{font-size:.87rem;color:var(--muted)}
+    .edu-content:hover{border-color:var(--border)}
+    .edu-period{font-family:'Cinzel',serif;font-size:.75rem;color:var(--accent);font-weight:700;letter-spacing:1px;margin-bottom:6px}
+    .edu-degree{font-weight:700;color:#fff;font-size:1rem;margin-bottom:4px}
+    .edu-inst{font-size:.88rem;color:var(--muted)}
 
     /* ── FOOTER ──────────────────────────────────────── */
     footer{
-      background:var(--surface);border-top:1px solid var(--border);
-      padding:36px 7%;display:flex;align-items:center;
-      justify-content:space-between;flex-wrap:wrap;gap:16px;
+      background:var(--bg);border-top:1px solid var(--border-light);
+      padding:40px 8%;display:flex;align-items:center;
+      justify-content:space-between;flex-wrap:wrap;gap:20px;
       position:relative;z-index:1;
     }
     .footer-brand{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
     .avaas-logo{height:26px;width:auto;filter:invert(1) brightness(2);opacity:.85}
-    .footer-contact{font-size:.8rem;color:var(--muted)}
-    .footer-copy{font-size:.8rem;color:var(--muted)}
-    .footer-socials{display:flex;gap:10px}
+    .footer-contact{font-size:.82rem;color:var(--muted)}
+    .footer-copy{font-size:.82rem;color:var(--muted)}
+    .footer-socials{display:flex;gap:12px}
     .social-pill{
       display:inline-flex;align-items:center;gap:6px;
-      background:rgba(255,255,255,.04);border:1px solid var(--border);
-      border-radius:999px;padding:6px 14px;font-size:.78rem;
-      color:var(--muted);text-decoration:none;transition:all .2s;
+      background:var(--surface2);border:1px solid var(--border-light);
+      border-radius:999px;padding:7px 16px;font-size:.8rem;
+      color:var(--muted);text-decoration:none;transition:all .25s;
     }
-    .social-pill:hover{color:var(--accent);border-color:var(--accent)}
+    .social-pill:hover{color:var(--accent);border-color:var(--border)}
 
     /* ── REVEAL ──────────────────────────────────────── */
     .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
@@ -428,13 +376,13 @@
     #mute-btn{
       position:fixed;bottom:28px;right:28px;z-index:200;
       width:46px;height:46px;border-radius:50%;
-      background:rgba(15,18,24,.85);backdrop-filter:blur(12px);
-      border:1px solid var(--border);color:var(--muted);
+      background:var(--surface2);
+      border:1px solid var(--border);color:var(--accent);
       font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
-      transition:all .2s;opacity:0;pointer-events:none;
+      transition:all .25s;opacity:0;pointer-events:none;
     }
     #mute-btn.show{opacity:1;pointer-events:all}
-    #mute-btn:hover{border-color:var(--accent);color:var(--accent)}
+    #mute-btn:hover{border-color:var(--accent);background:var(--accent-soft)}
   </style>
 </head>
 <body>
@@ -445,25 +393,25 @@
   <source src="ambient.ogg" type="audio/ogg" />
 </audio>
 
-<!-- INTRO OVERLAY -->
+<!-- INTRO CURTAIN -->
 <div id="intro-overlay">
-  <div class="intro-initials">ABY</div>
-  <div class="intro-sub">Akshay Benhynn Yendloori</div>
-  <button id="intro-enter-btn">▶ &nbsp;Enter</button>
-  <div class="intro-bar" id="intro-bar" style="display:none"><div class="intro-bar-fill" id="intro-bar-fill"></div></div>
+  <div class="intro-brand">
+    <div class="intro-monogram">A · B · Y</div>
+    <div class="intro-name">Akshay Benhynn Yendloori</div>
+    <div class="intro-subtitle">AI Research · Speech Systems · Executive Leadership</div>
+  </div>
+  <button id="intro-enter-btn">Enter Portfolio</button>
 </div>
 
 <!-- MUTE BUTTON -->
-<button id="mute-btn" title="Toggle sound">🔊</button>
+<button id="mute-btn" title="Toggle Sound">🔊</button>
 
-<!-- ANIMATED BACKGROUND ORBS -->
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
-<div class="orb orb3"></div>
+<!-- AMBIENT GLOW -->
+<div class="bg-glow"></div>
 
 <!-- NAV -->
 <nav>
-  <span class="nav-logo">Akshay Benhynn Yendloori</span>
+  <a href="#" class="nav-logo">Akshay Benhynn Yendloori</a>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#roles">Roles</a>
@@ -477,7 +425,7 @@
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-inner">
-    <span class="hero-tag">Researcher · Builder · Leader</span>
+    <span class="hero-tag">Researcher · Builder · Executive</span>
     <h1>Hi, I'm <span class="name-first">Akshay</span><span class="name-rest">Benhynn Yendloori</span></h1>
     <div class="hero-subtitle" id="neon-line">
       <span class="nw">Researcher</span><span class="ndot">·</span>
@@ -493,13 +441,11 @@
       <span class="nw">Global Citizen</span>
     </div>
     <div class="hero-btns">
-      <a href="#publications" class="btn btn-primary">📄 View Publications</a>
-      <a href="#roles" class="btn btn-ghost">🚀 My Roles</a>
+      <a href="#publications" class="btn btn-primary">View Publications</a>
+      <a href="#roles" class="btn btn-ghost">Leadership Roles</a>
     </div>
   </div>
   <div class="hero-photo-wrap">
-    <div class="hero-photo-ring"></div>
-    <div class="hero-photo-ring2"></div>
     <img src="akshay_photo.png" alt="Akshay Benhynn Yendloori"/>
   </div>
 </section>
@@ -508,25 +454,25 @@
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="section-label">About Me</div>
-  <h2 class="section-title">A quick introduction</h2>
-  <p class="section-desc">Third-year B.Tech AIML student with a deep focus on speech systems, HCI, and responsible AI — balancing research, leadership, and entrepreneurship.</p>
+  <div class="section-label">Overview</div>
+  <h2 class="section-title">Academic &amp; Research Portfolio</h2>
+  <p class="section-desc">Third-year B.Tech AIML student focusing on speech systems, human-computer interaction, and responsible AI — bridging research and executive leadership.</p>
   <div class="about-grid reveal">
     <div class="about-card">
-      <h3>🎓 Academic Background</h3>
-      <p>B.Tech AIML (3rd year) at Malla Reddy University. Cambridge academic programme alumnus. Certified C1 English speaker. Alumni of St. Andrews School.</p>
+      <h3>Academic Background</h3>
+      <p>B.Tech AIML (3rd year) at Malla Reddy University. Cambridge academic programme alumnus. Certified C1 Advanced English speaker. Alumni of St. Andrews School.</p>
     </div>
     <div class="about-card">
-      <h3>🔬 Research Focus</h3>
-      <p>Peer-reviewed publications at ACM CHI, IEEE ICASSP, ACM FAccT, NeurIPS, and Interspeech 2027, spanning HCI, Speech Processing, and Responsible AI.</p>
+      <h3>Research Direction</h3>
+      <p>Peer-reviewed publications at ACM CHI, IEEE ICASSP, ACM FAccT, NeurIPS, and Interspeech 2027, specializing in Speech AI, HCI, and Fair ML systems.</p>
     </div>
     <div class="about-card">
-      <h3>💼 Entrepreneurship</h3>
-      <p>CEO of AVAAS Speech Systems Pvt. Ltd. and CTO of Zuro Labs Healthcare LLP — building real-world AI products at the frontier of voice and healthcare technology.</p>
+      <h3>Ventures &amp; Enterprise</h3>
+      <p>CEO of AVAAS Speech Systems Pvt. Ltd. and CTO of Zuro Labs Healthcare LLP — developing real-world acoustic AI and healthcare diagnostics.</p>
     </div>
     <div class="about-card">
-      <h3>🌐 Community Leadership</h3>
-      <p>ACM &amp; IEEE Student Chapter Chair, TEDx Curator, MRU Research Society Chairperson, and MUN Vice President — shaping the next generation of innovators.</p>
+      <h3>Institutional Leadership</h3>
+      <p>ACM &amp; IEEE Student Chapter Chair, TEDx Curator, Chairperson of MRU Research Society, and MUN Vice President.</p>
     </div>
   </div>
 </section>
@@ -535,9 +481,9 @@
 
 <!-- ROLES -->
 <section id="roles">
-  <div class="section-label">Current Roles</div>
-  <h2 class="section-title">Where I lead</h2>
-  <p class="section-desc">Across academia, industry, and community.</p>
+  <div class="section-label">Leadership</div>
+  <h2 class="section-title">Executive &amp; Chapter Roles</h2>
+  <p class="section-desc">Positions across industry, academic chapters, and institutional research.</p>
   <div class="roles-grid">
     <div class="role-card reveal">
       <img src="logo_avaas.png" alt="AVAAS" style="height:24px;margin-bottom:14px;display:block;filter:invert(1) brightness(2);opacity:.9;"/>
@@ -581,47 +527,61 @@
 
 <!-- PUBLICATIONS -->
 <section id="publications">
-  <div class="section-label">Publications</div>
-  <h2 class="section-title">Peer-reviewed research</h2>
-  <p class="section-desc">Top-tier international venues spanning HCI, Speech Processing, and Responsible AI.</p>
+  <div class="section-label">Scholarship</div>
+  <h2 class="section-title">Peer-Reviewed Publications</h2>
+  <p class="section-desc">Accepted research papers across top-tier international conferences.</p>
   <div class="pub-list">
     <div class="pub-card reveal">
-      <div class="pub-badge chi">🖱️</div>
       <div>
-        <div class="pub-venue chi">ACM CHI 2027</div>
-        <div class="pub-title">Published Author — ACM CHI Conference on Human Factors in Computing Systems</div>
+        <div class="pub-title">ACM CHI Conference on Human Factors in Computing Systems</div>
+        <div class="pub-venue-detail">Human-Computer Interaction &amp; Interactive Systems</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="pub-tag">ACM CHI</span>
         <span class="pub-year">2027</span>
       </div>
     </div>
+
     <div class="pub-card reveal">
-      <div class="pub-badge ieee">🔊</div>
       <div>
-        <div class="pub-venue ieee">IEEE ICASSP 2027</div>
-        <div class="pub-title">Published Author — IEEE International Conference on Acoustics, Speech and Signal Processing</div>
+        <div class="pub-title">IEEE International Conference on Acoustics, Speech and Signal Processing</div>
+        <div class="pub-venue-detail">Speech Processing &amp; Acoustic Signal Analysis</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="pub-tag">IEEE ICASSP</span>
         <span class="pub-year">2027</span>
       </div>
     </div>
+
     <div class="pub-card reveal">
-      <div class="pub-badge facct">⚖️</div>
       <div>
-        <div class="pub-venue facct">ACM FAccT 2027</div>
-        <div class="pub-title">Published Author — ACM Conference on Fairness, Accountability, and Transparency</div>
+        <div class="pub-title">ACM Conference on Fairness, Accountability, and Transparency</div>
+        <div class="pub-venue-detail">Responsible AI &amp; Algorithmic Accountability</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="pub-tag">ACM FAccT</span>
         <span class="pub-year">2027</span>
       </div>
     </div>
+
     <div class="pub-card reveal">
-      <div class="pub-badge" style="background:rgba(255,110,180,.15)">🧠</div>
       <div>
-        <div class="pub-venue" style="color:#ff6eb4;font-size:.7rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:4px">NeurIPS 2027</div>
-        <div class="pub-title">Published Author — Neural Information Processing Systems</div>
+        <div class="pub-title">Neural Information Processing Systems</div>
+        <div class="pub-venue-detail">Deep Learning &amp; Machine Learning Foundations</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="pub-tag">NeurIPS</span>
         <span class="pub-year">2027</span>
       </div>
     </div>
+
     <div class="pub-card reveal">
-      <div class="pub-badge" style="background:rgba(255,180,50,.15)">🎙️</div>
       <div>
-        <div class="pub-venue" style="color:#ffb432;font-size:.7rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:4px">Interspeech 2027</div>
-        <div class="pub-title">Published Author — ISCA Interspeech Conference</div>
+        <div class="pub-title">ISCA Interspeech Conference</div>
+        <div class="pub-venue-detail">Speech Communication Science &amp; Neural Audio Systems</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="pub-tag">Interspeech</span>
         <span class="pub-year">2027</span>
       </div>
     </div>
@@ -632,36 +592,64 @@
 
 <!-- CERTIFICATIONS -->
 <section id="certs">
-  <div class="section-label">Certifications &amp; Achievements</div>
-  <h2 class="section-title">Credentials that matter</h2>
-  <p class="section-desc">Academic, language, and professional milestones.</p>
+  <div class="section-label">Credentials</div>
+  <h2 class="section-title">Certifications &amp; Honours</h2>
+  <p class="section-desc">Formal academic certifications and international conference author credentials.</p>
   <div class="cert-grid">
-    <div class="cert-card reveal"><span class="cert-icon">🎩</span><div class="cert-name">University of Cambridge</div><div class="cert-sub">Cambridge Academic Programme — Attendee</div></div>
-    <div class="cert-card reveal"><span class="cert-icon">🇬🇧</span><div class="cert-name">English C1 Proficiency</div><div class="cert-sub">Cambridge English — C1 Advanced Certificate</div></div>
-    <div class="cert-card reveal"><span class="cert-icon">🖱️</span><div class="cert-name">ACM CHI 2027</div><div class="cert-sub">Author Certification — Human Factors in Computing Systems</div></div>
-    <div class="cert-card reveal"><span class="cert-icon">📡</span><div class="cert-name">IEEE ICASSP 2027</div><div class="cert-sub">Author Certification — Acoustics, Speech &amp; Signal Processing</div></div>
-    <div class="cert-card reveal"><span class="cert-icon">⚖️</span><div class="cert-name">ACM FAccT 2027</div><div class="cert-sub">Author Certification — Fairness, Accountability &amp; Transparency</div></div>
-    <div class="cert-card reveal"><span class="cert-icon">🧠</span><div class="cert-name">NeurIPS 2027</div><div class="cert-sub">Author Certification — Neural Information Processing Systems</div></div>
-    <div class="cert-card reveal"><span class="cert-icon">🎙️</span><div class="cert-name">Interspeech 2027</div><div class="cert-sub">Author Certification — ISCA Interspeech Conference</div></div>
+    <div class="cert-card reveal">
+      <span class="cert-badge-tag">Academic</span>
+      <div class="cert-name">University of Cambridge</div>
+      <div class="cert-sub">Cambridge Academic Programme Attendee</div>
+    </div>
+    <div class="cert-card reveal">
+      <span class="cert-badge-tag">Proficiency</span>
+      <div class="cert-name">English C1 Advanced</div>
+      <div class="cert-sub">Cambridge Assessment English Certification</div>
+    </div>
+    <div class="cert-card reveal">
+      <span class="cert-badge-tag">Author Cert</span>
+      <div class="cert-name">ACM CHI 2027</div>
+      <div class="cert-sub">Certified Published Author</div>
+    </div>
+    <div class="cert-card reveal">
+      <span class="cert-badge-tag">Author Cert</span>
+      <div class="cert-name">IEEE ICASSP 2027</div>
+      <div class="cert-sub">Certified Published Author</div>
+    </div>
+    <div class="cert-card reveal">
+      <span class="cert-badge-tag">Author Cert</span>
+      <div class="cert-name">ACM FAccT 2027</div>
+      <div class="cert-sub">Certified Published Author</div>
+    </div>
+    <div class="cert-card reveal">
+      <span class="cert-badge-tag">Author Cert</span>
+      <div class="cert-name">NeurIPS 2027</div>
+      <div class="cert-sub">Certified Published Author</div>
+    </div>
+    <div class="cert-card reveal">
+      <span class="cert-badge-tag">Author Cert</span>
+      <div class="cert-name">Interspeech 2027</div>
+      <div class="cert-sub">Certified Published Author</div>
+    </div>
   </div>
 </section>
 
 <hr class="divider"/>
 
-<!-- DOMAIN -->
+<!-- DOMAIN EXPERTISE -->
 <section id="domain">
-  <div class="section-label">Domain Expertise</div>
-  <h2 class="section-title">What I work on</h2>
-  <p class="section-desc">My technical stack spans multiple sub-fields of Speech AI and broader ML systems.</p>
+  <div class="section-label">Specialization</div>
+  <h2 class="section-title">Technical &amp; Domain Expertise</h2>
+  <p class="section-desc">Focus areas across speech AI, signal processing, and machine learning architectures.</p>
   <div class="domain-grid">
-    <div class="domain-card reveal"><div class="domain-icon">🗣️</div><div class="domain-name">Speech Recognition (ASR)</div><div class="domain-desc">Acoustic modelling, end-to-end ASR, large vocabulary continuous speech recognition.</div></div>
-    <div class="domain-card reveal"><div class="domain-icon">🔊</div><div class="domain-name">Text-to-Speech (TTS)</div><div class="domain-desc">Neural TTS, voice cloning, prosody modelling, and expressive speech generation.</div></div>
-    <div class="domain-card reveal"><div class="domain-icon">🎙️</div><div class="domain-name">Speaker Verification &amp; Diarization</div><div class="domain-desc">Biometric identification, speaker segmentation, and verification pipelines.</div></div>
-    <div class="domain-card reveal"><div class="domain-icon">🌐</div><div class="domain-name">Multilingual &amp; Low-Resource NLP</div><div class="domain-desc">Cross-lingual transfer, Indic language processing, low-resource speech models.</div></div>
-    <div class="domain-card reveal"><div class="domain-icon">😶‍🌫️</div><div class="domain-name">Speech Emotion Recognition</div><div class="domain-desc">Affective computing, paralinguistic features, emotion-aware conversational AI.</div></div>
-    <div class="domain-card reveal"><div class="domain-icon">🤖</div><div class="domain-name">Conversational AI</div><div class="domain-desc">Spoken dialogue systems, voice assistants, task-oriented speech interfaces.</div></div>
-    <div class="domain-card reveal"><div class="domain-icon">⚖️</div><div class="domain-name">Fairness &amp; Responsible AI</div><div class="domain-desc">Bias detection in speech models, equitable benchmarking, accountable ML.</div></div>
-    <div class="domain-card reveal"><div class="domain-icon">🏥</div><div class="domain-name">Healthcare Speech AI</div><div class="domain-desc">Clinical speech analytics, voice pathology detection, AI-assisted diagnostics.</div></div>
+    <div class="domain-card reveal"><div class="domain-name">Speech Recognition (ASR)</div><div class="domain-desc">Acoustic modeling, end-to-end ASR, and large vocabulary continuous speech systems.</div></div>
+    <div class="domain-card reveal"><div class="domain-name">Text-to-Speech (TTS)</div><div class="domain-desc">Neural TTS, voice cloning, prosody modeling, and expressive acoustic synthesis.</div></div>
+    <div class="domain-card reveal"><div class="domain-name">Speaker Verification</div><div class="domain-desc">Biometric identification, speaker diarization, and voice authentication.</div></div>
+    <div class="domain-card reveal"><div class="domain-name">Multilingual NLP</div><div class="domain-desc">Cross-lingual transfer, Indic language modeling, and low-resource speech AI.</div></div>
+    <div class="domain-card reveal"><div class="domain-name">Emotion Recognition</div><div class="domain-desc">Affective computing, paralinguistic analysis, and emotion-aware dialogue.</div></div>
+    <div class="domain-card reveal"><div class="domain-name">Conversational AI</div><div class="domain-desc">Spoken dialogue systems, task-oriented interfaces, and real-time voice agents.</div></div>
+    <div class="domain-card reveal"><div class="domain-name">Responsible AI</div><div class="domain-desc">Bias detection in speech algorithms, equitable benchmarking, and transparent ML.</div></div>
+    <div class="domain-card reveal"><div class="domain-name">Healthcare Speech AI</div><div class="domain-desc">Clinical speech analytics, pathology detection from voice, and acoustic diagnostics.</div></div>
   </div>
 </section>
 
@@ -669,12 +657,12 @@
 
 <!-- EDUCATION -->
 <section id="education">
-  <div class="section-label">Education</div>
-  <h2 class="section-title">Academic journey</h2>
-  <p class="section-desc">From school to a globally recognised university and beyond.</p>
+  <div class="section-label">Trajectory</div>
+  <h2 class="section-title">Educational Milestones</h2>
+  <p class="section-desc">Academic foundation and ongoing university degree.</p>
   <div class="edu-timeline">
     <div class="edu-item reveal">
-      <div class="edu-dot">🎓</div>
+      <div class="edu-dot">01</div>
       <div class="edu-content">
         <div class="edu-period">2023 – Present</div>
         <div class="edu-degree">B.Tech in Artificial Intelligence &amp; Machine Learning (3rd Year)</div>
@@ -682,7 +670,7 @@
       </div>
     </div>
     <div class="edu-item reveal">
-      <div class="edu-dot">🎩</div>
+      <div class="edu-dot">02</div>
       <div class="edu-content">
         <div class="edu-period">Cambridge, UK</div>
         <div class="edu-degree">Academic Programme</div>
@@ -690,9 +678,9 @@
       </div>
     </div>
     <div class="edu-item reveal">
-      <div class="edu-dot">🏫</div>
+      <div class="edu-dot">03</div>
       <div class="edu-content">
-        <div class="edu-period">School</div>
+        <div class="edu-period">Secondary</div>
         <div class="edu-degree">Higher Secondary Education</div>
         <div class="edu-inst">St. Andrews School — Alumni</div>
       </div>
@@ -704,13 +692,13 @@
 <footer>
   <div class="footer-brand">
     <img src="logo_avaas.png" alt="AVAAS" class="avaas-logo"/>
-    <span class="footer-contact">📧 <a href="mailto:ceo@avaas.me" style="color:var(--muted);text-decoration:none">ceo@avaas.me</a></span>
+    <span class="footer-contact"><a href="mailto:ceo@avaas.me" style="color:var(--muted);text-decoration:none">ceo@avaas.me</a></span>
   </div>
   <div class="footer-copy">© 2026 · Akshay Benhynn Yendloori · All rights reserved</div>
   <div class="footer-socials">
-    <a href="mailto:ceo@avaas.me" class="social-pill">📧 Contact</a>
-    <a href="#" class="social-pill">💼 LinkedIn</a>
-    <a href="#" class="social-pill">🔬 Scholar</a>
+    <a href="mailto:ceo@avaas.me" class="social-pill">Email</a>
+    <a href="https://www.linkedin.com/in/akshay-benhynn-yendloori" class="social-pill" target="_blank">LinkedIn</a>
+    <a href="https://github.com/Akbenhynn07" class="social-pill" target="_blank">GitHub</a>
   </div>
 </footer>
 
@@ -721,18 +709,18 @@ const revealObs = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-/* ── NEON SWEEP ──────────────────────────────────────── */
+/* ── SPOTLIGHT SWEEP ─────────────────────────────────── */
 const nwSpans = document.querySelectorAll('.nw');
 let nwIdx = 0;
 function neonSweep() {
   nwSpans.forEach(s => s.classList.remove('lit'));
-  nwSpans[nwIdx].classList.add('lit');
+  if (nwSpans[nwIdx]) nwSpans[nwIdx].classList.add('lit');
   nwIdx = (nwIdx + 1) % nwSpans.length;
 }
 neonSweep();
-setInterval(neonSweep, 900);
+setInterval(neonSweep, 950);
 
-/* ── HIGH-QUALITY NEOCLASSICAL AMBIENT PIANO AUDIO ───────────────────────────── */
+/* ── AMBIENT AUDIO & CURTAIN SEQUENCE ────────────────── */
 const bgAudio = document.getElementById('bg-audio');
 
 function playIntroSound() {
@@ -758,28 +746,13 @@ function playIntroSound() {
   };
 }
 
-/* ── INTRO SEQUENCE — click-triggered for audio unlock ── */
 document.body.style.overflow = 'hidden';
 
 document.getElementById('intro-enter-btn').addEventListener('click', function() {
-  // Hide the button, show and start the progress bar
-  this.style.opacity = '0';
-  this.style.pointerEvents = 'none';
-  const bar = document.getElementById('intro-bar');
-  const fill = document.getElementById('intro-bar-fill');
-  bar.style.display = 'block';
-  requestAnimationFrame(() => requestAnimationFrame(() => fill.classList.add('go')));
-
-  // Play the soothing neoclassical ambient piano track
   playIntroSound();
-
-  // Fade out overlay after 4.5s
-  setTimeout(() => {
-    const overlay = document.getElementById('intro-overlay');
-    overlay.classList.add('fade-out');
-    document.body.style.overflow = '';
-    overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
-  }, 4500);
+  const overlay = document.getElementById('intro-overlay');
+  overlay.classList.add('fade-out');
+  document.body.style.overflow = '';
 });
 </script>
 </body>
